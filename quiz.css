@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  color: #FFF;
+  background-color: #170922;
+  height: 100%;
+  font-family: 'JetBrains Mono';
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .login-card {
+      background-color: #487CFF;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 512px;
+
+      input {
+          padding: 8px;
+          outline: none;
+          border: none;
+          border-radius: 4px;
+          font-size: 14pt;
+          width: 50%;
+      }
+
+      h1 {
+          text-align: center;
+      }
+
+      button {
+          margin-top: 8px;
+          padding: 8px 12px;
+          border-radius: 4px;
+          border: none;
+          padding: none;
+          background-color: #355DC4;
+          color: #FFF;
+
+          &:hover {
+              background-color: #2D50A7;
+              cursor: pointer;
+          }
+
+          &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed
+          }
+      }
+  }
+}
+
+#quiz {
+  height: 100%;
+  user-select: none;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  .header {
+    font-size: 1.75rem;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+    font-size: 2rem;
+  }
+
+  .options {
+    input {
+      font-size: 2rem;
+      text-align: center;
+      outline: none;
+      border: none;
+      height: 42px;
+    }
+
+    button {
+      width: 128px;
+      height: 128px;
+      font-size: 1.5rem;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      background-color: white;
+
+      &:hover {
+        background-color: rgb(218, 218, 218);
+        cursor: pointer;
+      }
+      
+      &.active {
+        background-color: rgb(80, 255, 80);
+      }
+    }
+  }
+}
