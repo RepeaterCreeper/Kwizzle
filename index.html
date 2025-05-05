@@ -36,6 +36,23 @@
     let b = localStorage.getItem('blurred');
 
     if(!localStorage.getItem('quizDone') && Number(b) < 2) {
+      window.addEventListener('blur', function(e) {
+        if(Number(b) < 2) {
+          document.getElementById('warning').showModal();
+
+          setTimeout(function() {
+          document.getElementById('warning').close();
+          }, 10000)
+        }
+
+        if(localStorage.getItem('blurred')) {
+          localStorage.setItem('blurred', Number(localStorage.getItem('blurred')) + 1);
+        }
+        else {
+          localStorage.setItem('blurred', 1);
+        }
+      });
+      
       if(localStorage.getItem('studentName')) {
         document.getElementById('quiz').style.display = 'flex';
         document.getElementById('entry').style.display = 'none';
@@ -66,8 +83,6 @@
         }
 
         if(Object.keys(answers).length >= 10) {
-          window.removeEventListener('blur');
-          
           alert('Quiz Finished! Raise your hand.')
           localStorage.setItem('quizDone', true);
           return;
@@ -100,23 +115,6 @@
       });
 
       function generateQuestion(index = -1) {
-        window.addEventListener('blur', function(e) {
-          if(Number(b) < 2) {
-            document.getElementById('warning').showModal();
-
-            setTimeout(function() {
-            document.getElementById('warning').close();
-            }, 10000)
-          }
-
-          if(localStorage.getItem('blurred')) {
-            localStorage.setItem('blurred', Number(localStorage.getItem('blurred')) + 1);
-          }
-          else {
-            localStorage.setItem('blurred', 1);
-          }
-        });
-        
         const d = JSON.parse(atob(questionBank['questions']));
         const answers = JSON.parse(localStorage.getItem('answers'));
         for(let k of Object.keys(answers ?? {})) {
