@@ -30,7 +30,7 @@
     const studentNameInput = document.getElementById("student_name");
     let b = localStorage.getItem('blurred');
 
-    if(!localStorage.getItem('quizDone') && Number(b) > 3) {
+    if(!localStorage.getItem('quizDone') && Number(b) < 2) {
       window.addEventListener('blur', function(e) {
         if(localStorage.getItem('blurred')) {
           localStorage.setItem('blurred', Number(localStorage.getItem('blurred')) + 1);
