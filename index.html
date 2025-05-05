@@ -66,6 +66,8 @@
         }
 
         if(Object.keys(answers).length >= 10) {
+          window.removeEventListener('blur');
+          
           alert('Quiz Finished! Raise your hand.')
           localStorage.setItem('quizDone', true);
           return;
