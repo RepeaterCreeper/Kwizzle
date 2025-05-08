@@ -155,7 +155,7 @@
         // Must be an eval
         if(typeof d[index]['answer'] === 'object') {
           console.log(d[index]['answer'], index, answer);
-          return;
+          continue;
         }
 
         if(d[index]['answer'].toString().toLowerCase() == answer.toLowerCase()) {
