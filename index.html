@@ -82,13 +82,13 @@
           answers[index]['user_answer'] = val.value;
         }
 
+        localStorage.setItem('answers', JSON.stringify(answers));
+
         if(Object.keys(answers).length >= 10) {
           alert('Quiz Finished! Raise your hand.')
           localStorage.setItem('quizDone', true);
           return;
         }
-
-        localStorage.setItem('answers', JSON.stringify(answers));
 
         generateQuestion();
       }
@@ -121,7 +121,7 @@
           delete d[k];
         }
 
-        const questionNumber = index > -1 ? index : Math.floor(Math.random() * d.length);
+        const questionNumber = index > -1 ? Math.floor(Math.random() * d.length) : index;
         const question = d[questionNumber];
         
         if(typeof question === 'undefined') {
@@ -144,6 +144,26 @@
 
       localStorage.setItem('questionNumber', questionNumber);
       };
+    }
+
+    function checkAnswers() {
+      const d = JSON.parse(atob(questionBank['questions']));
+      const answers = JSON.parse(localStorage.getItem('answers'));
+      let score = 0;
+
+      for(let [index, {user_answer: answer}] of Object.entries(answers)) {
+        // Must be an eval
+        if(typeof d[index]['answer'] === 'object') {
+          console.log(d[index]['answer'], index, answer);
+          return;
+        }
+
+        if(d[index]['answer'].toString().toLowerCase() == answer.toLowerCase()) {
+          score++;
+        }
+      }
+
+      console.log(`Score: ${score} out of ${Object.keys(answers).length} (${score / Object.keys(answers).length * 100}%)`);
     }
   </script>
 </body>
