@@ -117,13 +117,11 @@
       function generateQuestion(index = -1) {
         const d = JSON.parse(atob(questionBank['questions']));
         const answers = JSON.parse(localStorage.getItem('answers'));
-        if(answers && answers.length > 0) {
-          for(let k of Object.keys(answers ?? {})) {
-            delete d[k];
-          }
+        for(let k of Object.keys(answers ?? {})) {
+          delete d[k];
         }
 
-        const questionNumber = index > -1 ? Math.floor(Math.random() * d.length) : index;
+        const questionNumber = index === -1 ? Math.floor(Math.random() * d.length) : index;
         const question = d[questionNumber];
         
         if(typeof question === 'undefined') {
