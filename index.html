@@ -114,20 +114,19 @@
         generateQuestion();
       });
 
+      let existingQuestions = [];
       function generateQuestion(index = -1) {
         const d = JSON.parse(atob(questionBank['questions']));
         const answers = JSON.parse(localStorage.getItem('answers'));
-        for(let k of Object.keys(answers ?? {})) {
-          delete d[k];
-        }
 
         const questionNumber = index > -1 ? Math.floor(Math.random() * d.length) : index;
         const question = d[questionNumber];
         
-        if(typeof question === 'undefined') {
+        if(typeof question === 'undefined' || existingQuestions.includes(questionNumber)) {
           generateQuestion();
         }
 
+        existingQuestions.push(questionNumber);
         let options = '';
         if(question.type === 'boolean') {
           options = `<button onclick="storeAnswer(${questionNumber}, 'true')">true</button>
