@@ -117,7 +117,7 @@
       function generateQuestion(index = -1) {
         const d = JSON.parse(atob(questionBank['questions']));
         const answers = JSON.parse(localStorage.getItem('answers'));
-        if(answers.length > 0) {
+        if(answers && answers.length > 0) {
           for(let k of Object.keys(answers ?? {})) {
             delete d[k];
           }
